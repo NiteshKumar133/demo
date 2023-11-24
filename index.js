@@ -1,16 +1,16 @@
-const express = require("express");
-const path = require('path');
+const express = require('express');
+const useragent = require('express-useragent');
+
 const app = express();
-const os = require('node:os');
-app.get('/', (req, res) => {
-   res.send("hello sir ")
-  });
-app.get('/random', (req, res) => {
-    res.send(os.hostname())
-  });
-  app.get('/wifi', (req, res) => {
-    res.send(os.networkInterfaces()['Wi-Fi'])
-  });
-app.listen(3000,(req,res)=>{
-    console.log("hello")
-})
+app.use(useragent.express());
+
+app.get('/desi', (req, res) => {
+  const userAgent = req.useragent;
+  const deviceName = userAgent.source;
+
+  res.send(`Device Name: ${deviceName}`);
+});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
