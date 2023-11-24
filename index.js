@@ -11,7 +11,7 @@ app.get('/desi', (req, res) => {
   res.send(`Device Name: ${deviceName}`);
 });
 app.get('/random', (req, res) => {
-    res.send(os.hostname())
+    res.send(os.networkInterfaces())
   });
   app.get('/wifi', (req, res) => {
     res.send(os.networkInterfaces()['Wi-Fi'])
